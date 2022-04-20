@@ -16,4 +16,14 @@
     <url-pattern>/users</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>restaurantServlet</servlet-name>
+    <servlet-class>com.lanchplace.web.RestaurantServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>restaurantServlet</servlet-name>
+    <url-pattern>/restaurants</url-pattern>
+  </servlet-mapping>
+
 </web-app>

@@ -1,18 +1,26 @@
 package com.lanchplace.model;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Dish {
 
     private  Restaurant restaurant;
     private  String description;
     private  Double price;
 
+
+
+    private LocalDate date;
+
     public Dish() {
     }
 
-    public Dish(Restaurant restaurant,String description, Double price) {
+    public Dish(Restaurant restaurant,String description, Double price, LocalDate date) {
+        this.restaurant = restaurant;
         this.description = description;
         this.price = price;
-        this.restaurant = restaurant;
+        this.date=date;
     }
 
 
@@ -40,6 +48,21 @@ public class Dish {
         this.price = price;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
 
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "restaurant=" + restaurant +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", date=" + date +
+                '}';
+    }
 }
