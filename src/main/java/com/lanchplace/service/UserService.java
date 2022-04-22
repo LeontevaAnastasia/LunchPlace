@@ -10,7 +10,11 @@ import static com.lanchplace.util.ValidationUtil.checkNotFoundWithId;
 
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public User create(User user) {
         return userRepository.save(user);

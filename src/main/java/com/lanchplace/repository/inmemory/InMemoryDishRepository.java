@@ -1,6 +1,7 @@
-package com.lanchplace.repository;
+package com.lanchplace.repository.inmemory;
 
 import com.lanchplace.model.Dish;
+import com.lanchplace.repository.DishRepository;
 import com.lanchplace.util.DishUtil;
 
 import java.util.Collection;
@@ -9,7 +10,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class InMemoryDishRepository implements DishRepository{
+public class InMemoryDishRepository implements DishRepository {
 
     private final Map<Integer, Dish> repositoryDish = new ConcurrentHashMap<>();
     private final AtomicInteger counter = new AtomicInteger(0);

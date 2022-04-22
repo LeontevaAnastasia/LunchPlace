@@ -1,7 +1,8 @@
-package com.lanchplace.repository;
+package com.lanchplace.repository.inmemory;
 
 import com.lanchplace.model.Dish;
 import com.lanchplace.model.Restaurant;
+import com.lanchplace.repository.RestaurantRepository;
 import com.lanchplace.util.DishUtil;
 
 import java.util.Collection;

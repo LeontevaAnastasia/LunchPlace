@@ -2,7 +2,7 @@ package com.lanchplace.web;
 
 import com.lanchplace.model.Dish;
 import com.lanchplace.repository.DishRepository;
-import com.lanchplace.repository.InMemoryDishRepository;
+import com.lanchplace.repository.inmemory.InMemoryDishRepository;
 import com.lanchplace.util.DishUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Objects;
 
 public class DishServlet extends HttpServlet {
