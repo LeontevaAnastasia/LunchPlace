@@ -4,24 +4,23 @@ import java.util.List;
 
 public class Restaurant {
 
+    private Integer id;
     private String name;
-
-
-
     private List <Vote> votes;
     private List<Dish> dishes;
 
     public Restaurant() {
 
     }
+    public Restaurant(String name) {
+        this.name = name;
+    }
     public Restaurant(String name, List<Dish> dishes, List <Vote> votes) {
         this.name = name;
         this.dishes = dishes;
         this.votes=votes;
     }
-    public Restaurant(String name) {
-        this.name = name;
-    }
+
 
     public String getName() {
         return name;
@@ -45,11 +44,23 @@ public class Restaurant {
         this.votes = votes;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isNew() {
+        return id == null;
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +
                 "name='" + name + '\'' +
-                ", vote=" + votes +
                 '}';
     }
+
 }

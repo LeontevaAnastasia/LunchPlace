@@ -16,7 +16,7 @@ public class RestaurantServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.info("getAll");
-        request.setAttribute("restaurants", DishUtil.getRestaurant());
+        request.setAttribute("restaurants", DishUtil.restaurant);
         request.getRequestDispatcher("/restaurant.jsp").forward(request, response);
     }
 

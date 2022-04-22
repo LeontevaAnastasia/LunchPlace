@@ -1,8 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%--<%@ taglib prefix="fn" uri="http://lunchplace.com/functions" %> --%>
-<%--<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions "%>--%>
+
 <html>
 <head>
     <title>Restaurant list</title>
@@ -17,10 +16,17 @@
         <thead>
         <tr>
             <th>Restaurant</th>
-            <th>vote</th>
+            <th>Vote</th>
+
 
         </tr>
         </thead>
+        <c:forEach items="${restaurants}" var="restaurant">
+        <jsp:useBean id="restaurant" type="com.lanchplace.model.Restaurant"/>
+            </tr>
+        <td>${restaurant.name}</td
+            </tr>
+        </c:forEach>
     </table>
 </section>
 </body>

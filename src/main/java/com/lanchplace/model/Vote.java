@@ -44,7 +44,12 @@ public class Vote {
         this.date = date;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "user=" + user +
+                ", restaurant=" + restaurant +
+                ", date=" + date +
+                '}';
+    }
 }
