@@ -1,9 +1,11 @@
 package com.lanchplace.web.user;
 
 import com.lanchplace.model.User;
+import org.springframework.stereotype.Controller;
 
 import static com.lanchplace.web.SecurityUtil.authUserId;
 
+@Controller
 public class ProfileRestController extends AbstractUserController {
 
     public User get() {

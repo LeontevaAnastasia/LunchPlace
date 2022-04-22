@@ -2,9 +2,11 @@ package com.lanchplace.web.user;
 
 import java.util.List;
 import com.lanchplace.model.User;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
+@Controller
 public class AdminRestController extends AbstractUserController {
 
     @Override

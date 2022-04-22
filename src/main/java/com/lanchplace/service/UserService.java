@@ -2,12 +2,14 @@ package com.lanchplace.service;
 
 import com.lanchplace.model.User;
 import com.lanchplace.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static com.lanchplace.util.ValidationUtil.checkNotFound;
 import static com.lanchplace.util.ValidationUtil.checkNotFoundWithId;
 
+@Service
 public class UserService {
 
     private final UserRepository userRepository;
