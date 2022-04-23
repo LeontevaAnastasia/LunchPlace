@@ -41,7 +41,7 @@
         </dl>
         <dl>
             <dt>Price:</dt>
-            <dd><input type="number" value="${dish.price}" name="price" required></dd>
+            <dd><input type="number" step="0.1" value="${dish.price}" name="price" required></dd>
         </dl>
         <dl>
             <dt>Date:</dt>

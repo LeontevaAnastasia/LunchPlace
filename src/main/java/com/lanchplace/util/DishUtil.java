@@ -13,26 +13,23 @@ import java.util.stream.Collectors;
 public class DishUtil {
   // для тестирования добавили блюд, нужно их отсортировать по ресторанам и присвоить ресторану лист с его блюдом
     public static final List<Dish> dishes = Arrays.asList(
-            new Dish(new Restaurant("Shabby").getName(),"Сырный суп", 299.00, LocalDate.of(2022,Month.APRIL,20)),
-            new Dish(new Restaurant("Shabby").getName(),"Жаркое по домашнему", 350.50, LocalDate.of(2022,Month.APRIL,19)),
-            new Dish(new Restaurant("Seafood").getName(),"Салат с креветками", 420.00, LocalDate.of(2022,Month.APRIL,24)),
-            new Dish(new Restaurant("Seafood").getName(),"Том ям", 390.90, LocalDate.of(2022,Month.APRIL,23)),
-            new Dish(new Restaurant("Tokyo").getName(),"Курица в кисло-сладком соусе", 490.00, LocalDate.of(2022,Month.APRIL,22))
+            new Dish(new Restaurant("Shabby",null,null).getName(),"Сырный суп", 299.00, LocalDate.of(2022,Month.APRIL,20)),
+            new Dish(new Restaurant("Shabby",null,null).getName(),"Жаркое по домашнему", 350.50, LocalDate.of(2022,Month.APRIL,19)),
+            new Dish(new Restaurant("Seafood",null,null).getName(),"Салат с креветками", 420.00, LocalDate.of(2022,Month.APRIL,24)),
+            new Dish(new Restaurant("Seafood",null,null).getName(),"Том ям", 390.70, LocalDate.of(2022,Month.APRIL,23)),
+            new Dish(new Restaurant("Tokyo",null,null).getName(),"Курица в кисло-сладком соусе", 490.00, LocalDate.of(2022,Month.APRIL,22))
             );
 
-    public static final List<Restaurant> restaurant = Arrays.asList(
-            new Restaurant("Shabby"),
-            new Restaurant("Seafood"),
-            new Restaurant("Tokyo")
+    public static final Collection<Restaurant> restaurant = Arrays.asList(
+            new Restaurant("Shabby",null,null),
+            new Restaurant("Seafood",null,null),
+            new Restaurant("Tokyo",null,null)
     );
 
-    public static String getRestaurant(){
-        return restaurant.toString();
+    public static Collection<Restaurant> getRestaurant(Collection<Restaurant> restaurant){
+        return restaurant;
     }
 
-
-
-    List<Dish> todayDishes = new ArrayList<>();
 
     public static List<Dish> todayMenu(Collection<Dish> dishes){
         LocalDate now = LocalDate.now();

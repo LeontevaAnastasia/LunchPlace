@@ -2,7 +2,53 @@ package com.lanchplace.web.dish;
 
 import com.lanchplace.model.Dish;
 import com.lanchplace.service.DishService;
+import com.lanchplace.util.DishUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.lang.Nullable;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Collection;
+import java.util.List;
+
+import static com.lanchplace.util.ValidationUtil.assureIdConsistent;
+import static com.lanchplace.util.ValidationUtil.checkNew;
 
 public class DishRestController {
-    private DishService dishService;
+
+    private static final Logger log = LoggerFactory.getLogger(DishRestController.class);
+
+    private final DishService dishService;
+
+    public DishRestController(DishService dishService) {
+        this.dishService = dishService;
+    }
+
+    public Dish get(int id) {
+        return dishService.get(id);
+    }
+
+    public void delete(int id) {
+        dishService.delete(id);
+    }
+
+    public Collection<Dish> getAll() {
+        return DishUtil.todayMenu(dishService.getAll());
+    }
+
+    public Dish create(Dish dish) {
+        checkNew(dish);
+        log.info("create {}", dish);
+        return dishService.create(dish);
+    }
+
+    public void update(Dish dish, int id) {
+        assureIdConsistent(dish, id);
+        log.info("update {}", dish);
+        dishService.update(dish);
+    }
+
+
 }
+

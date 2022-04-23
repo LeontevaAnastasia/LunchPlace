@@ -3,9 +3,7 @@ package com.lanchplace.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Dish {
-
-
+public class Dish extends AbstractBaseEntity {
 
     private Integer id;
     private  String restaurant;
@@ -13,19 +11,16 @@ public class Dish {
     private  Double price;
     private LocalDate date;
 
-    public Dish() {
-    }
-
 
     public Dish(Integer id, String restaurant,String description, Double price, LocalDate date) {
-        this.id=id;
+        super(id);
         this.restaurant = restaurant;
         this.description = description;
         this.price = price;
         this.date=date;
     }
 
-    public Dish(String restaurant, String description, double price, LocalDate date) {
+    public Dish(String restaurant, String description, Double price, LocalDate date) {
         this(null, restaurant, description, price, date);
     }
 
@@ -60,17 +55,8 @@ public class Dish {
     public void setDate(LocalDate date) {
         this.date = date;
     }
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    public boolean isNew() {
-        return id == null;
-    }
 
     @Override
     public String toString() {

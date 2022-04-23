@@ -55,7 +55,7 @@ public class DishServlet extends HttpServlet {
             case "create":
             case "update":
                 final Dish dish = "create".equals(action) ?
-                        new Dish("","", 100,LocalDate.now()) :
+                        new Dish("","", 100.40,LocalDate.now()) :
                         dishRepository.get(getId(request));
                 request.setAttribute("dish", dish);
                 request.getRequestDispatcher("/dishForm.jsp").forward(request, response);

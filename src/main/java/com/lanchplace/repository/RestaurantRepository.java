@@ -4,6 +4,7 @@ import com.lanchplace.model.Dish;
 import com.lanchplace.model.Restaurant;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface RestaurantRepository {
     Restaurant save(Restaurant restaurant);

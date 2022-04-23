@@ -1,5 +1,8 @@
 package com.lanchplace.model;
 
+import org.springframework.util.CollectionUtils;
+
+import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
@@ -9,7 +12,7 @@ public class User extends AbstractNamedEntity {
     private String name;
     private String email;
     private String password;
-    private boolean enabled = true;
+    private boolean enabled;
     private Date registered = new Date();
     private Set<Role> roles;
 
@@ -68,6 +71,10 @@ public class User extends AbstractNamedEntity {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
 
     @Override

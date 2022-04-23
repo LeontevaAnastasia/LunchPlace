@@ -24,7 +24,7 @@
             <th></th>
         </tr>
         </thead>
-        <c:forEach items="${dishes}" var="dish">
+        <c:forEach items="${requestScope.dishes}" var="dish">
             <jsp:useBean id="dish" type="com.lanchplace.model.Dish"/>
                 <td>${dish.restaurant}</td>
                 <td>${dish.description}</td>

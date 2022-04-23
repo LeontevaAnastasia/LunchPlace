@@ -2,25 +2,29 @@ package com.lanchplace.model;
 
 import java.util.List;
 
-public class Restaurant {
+public class Restaurant extends AbstractBaseEntity {
 
     private Integer id;
     private String name;
     private List <Vote> votes;
     private List<Dish> dishes;
 
-    public Restaurant() {
 
+    //public Restaurant(String name) {
+     //   this.name = name;
+   // }
+
+    public Restaurant(Integer id, String name, List<Dish> dishes, List<Vote> votes) {
+      super(id);
+      this.name = name;
+      this.dishes = dishes;
+      this.votes = votes;
     }
-    public Restaurant(String name) {
-        this.name = name;
-    }
+
     public Restaurant(String name, List<Dish> dishes, List <Vote> votes) {
-        this.name = name;
-        this.dishes = dishes;
-        this.votes=votes;
-    }
+        this(null, name,dishes,votes);
 
+    }
 
     public String getName() {
         return name;
@@ -42,14 +46,6 @@ public class Restaurant {
 
     public void setVotes(List<Vote> votes) {
         this.votes = votes;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public boolean isNew() {
