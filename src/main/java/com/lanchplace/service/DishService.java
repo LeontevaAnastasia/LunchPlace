@@ -3,6 +3,7 @@ package com.lanchplace.service;
 import com.lanchplace.model.Dish;
 import com.lanchplace.repository.DishRepository;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import static com.lanchplace.util.ValidationUtil.checkNotFoundWithId;
 
+@Service
 public class DishService {
     private final DishRepository dishRepository;
 

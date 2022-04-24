@@ -4,8 +4,12 @@ import com.lanchplace.model.Dish;
 import com.lanchplace.repository.DishRepository;
 import com.lanchplace.repository.inmemory.InMemoryDishRepository;
 import com.lanchplace.util.DishUtil;
+import com.lanchplace.web.dish.DishRestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,26 +22,38 @@ import java.util.Objects;
 public class DishServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(DishServlet.class);
 
-    private DishRepository dishRepository;
+    private ConfigurableApplicationContext springContext;
+    private DishRestController dishController;
+    //private DishRepository dishRepository;
 
     @Override
     public void init() {
-        dishRepository = new InMemoryDishRepository();
+        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        dishController = springContext.getBean(DishRestController.class);
     }
 
     @Override
+    public void destroy() {
+        springContext.close();
+        super.destroy();
+    }
+
+        @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String id = request.getParameter("id");
+       // String id = request.getParameter("id");
 
-        Dish dish = new Dish(id.isEmpty() ? null : Integer.valueOf(id),
+        Dish dish = new Dish(
                 request.getParameter("restaurant"),
                 request.getParameter("description"),
                 Double.parseDouble(request.getParameter("price")),
                 LocalDate.parse(request.getParameter("date")));
 
-        log.info(dish.isNew() ? "Create {}" : "Update {}", dish);
-        dishRepository.save(dish);
+            if (StringUtils.hasLength(request.getParameter("id"))) {
+                dishController.update(dish, getId(request));
+            } else {
+                dishController.create(dish);
+            }
         response.sendRedirect("dishes");
     }
 
@@ -49,14 +65,14 @@ public class DishServlet extends HttpServlet {
             case "delete":
                 int id = getId(request);
                 log.info("Delete {}", id);
-                dishRepository.delete(id);
+                dishController.delete(id);
                 response.sendRedirect("dishes");
                 break;
             case "create":
             case "update":
                 final Dish dish = "create".equals(action) ?
                         new Dish("","", 100.40,LocalDate.now()) :
-                        dishRepository.get(getId(request));
+                        dishController.get(getId(request));
                 request.setAttribute("dish", dish);
                 request.getRequestDispatcher("/dishForm.jsp").forward(request, response);
                 break;
@@ -64,7 +80,7 @@ public class DishServlet extends HttpServlet {
             default:
                 log.info("getAll");
                 request.setAttribute("dishes",
-                        DishUtil.todayMenu(dishRepository.getAllDishes()));
+                        dishController.getAll());
                 request.getRequestDispatcher("/dishes.jsp").forward(request, response);
                 break;
         }

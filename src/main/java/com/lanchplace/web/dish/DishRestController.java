@@ -6,6 +6,7 @@ import com.lanchplace.util.DishUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,6 +16,7 @@ import java.util.List;
 import static com.lanchplace.util.ValidationUtil.assureIdConsistent;
 import static com.lanchplace.util.ValidationUtil.checkNew;
 
+@Controller
 public class DishRestController {
 
     private static final Logger log = LoggerFactory.getLogger(DishRestController.class);
