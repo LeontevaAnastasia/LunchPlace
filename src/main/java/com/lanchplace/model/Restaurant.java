@@ -4,28 +4,24 @@ import java.util.List;
 
 public class Restaurant extends AbstractBaseEntity {
 
-    private Integer id;
+
     private String name;
-    private List <Vote> votes;
-    private List<Dish> dishes;
 
 
-    //public Restaurant(String name) {
-     //   this.name = name;
-   // }
 
-    public Restaurant(Integer id, String name, List<Dish> dishes, List<Vote> votes) {
+    private Long votesCount;
+
+
+    public Restaurant(Integer id, String name, Long votesCount) {
       super(id);
       this.name = name;
-      this.dishes = dishes;
-      this.votes = votes;
+      this.votesCount = votesCount;
     }
 
-    public Restaurant(String name, List<Dish> dishes, List <Vote> votes) {
-        this(null, name,dishes,votes);
+    public Restaurant(String name,  Long votes) {
+        this(null, name,votes);
 
     }
-
     public String getName() {
         return name;
     }
@@ -33,21 +29,14 @@ public class Restaurant extends AbstractBaseEntity {
     public void setName(String name) {
         this.name = name;
     }
-    public List<Dish> getDishes() {
-        return dishes;
+
+    public Long getVotesCount() {
+        return votesCount;
     }
 
-    public void setDishes(List<Dish> dishes) {
-        this.dishes = dishes;
+    public void setVotesCount(Long votesCount) {
+        this.votesCount = votesCount;
     }
-    public List<Vote> getVotes() {
-        return votes;
-    }
-
-    public void setVotes(List<Vote> votes) {
-        this.votes = votes;
-    }
-
     public boolean isNew() {
         return id == null;
     }

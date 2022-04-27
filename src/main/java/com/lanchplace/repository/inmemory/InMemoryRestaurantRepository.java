@@ -4,12 +4,14 @@ import com.lanchplace.model.Dish;
 import com.lanchplace.model.Restaurant;
 import com.lanchplace.repository.RestaurantRepository;
 import com.lanchplace.util.DishUtil;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Repository
 public class InMemoryRestaurantRepository implements RestaurantRepository {
     private final Map<Integer, Restaurant> restaurantRepository = new ConcurrentHashMap<>();
     private final AtomicInteger counter = new AtomicInteger(0);

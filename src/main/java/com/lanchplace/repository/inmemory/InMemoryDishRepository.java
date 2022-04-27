@@ -24,7 +24,6 @@ public class InMemoryDishRepository implements DishRepository {
 
     @Override
     public Dish save(Dish dish) {
-        // We cannot use method reference "ConcurrentHashMap::new" here. It will be equivalent wrong "new ConcurrentHashMap<>(userId)"
 
         if (dish.isNew()) {
             dish.setId(counter.incrementAndGet());

@@ -24,7 +24,6 @@ public class DishServlet extends HttpServlet {
 
     private ConfigurableApplicationContext springContext;
     private DishRestController dishController;
-    //private DishRepository dishRepository;
 
     @Override
     public void init() {

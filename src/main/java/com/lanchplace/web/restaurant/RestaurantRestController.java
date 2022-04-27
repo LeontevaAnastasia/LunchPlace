@@ -8,6 +8,7 @@ import com.lanchplace.util.DishUtil;
 import com.lanchplace.web.dish.DishRestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 import static com.lanchplace.util.ValidationUtil.assureIdConsistent;
 import static com.lanchplace.util.ValidationUtil.checkNew;
 
+@Controller
 public class RestaurantRestController {
     private final RestaurantService restaurantService;
     private static final Logger log = LoggerFactory.getLogger(RestaurantRestController.class);
