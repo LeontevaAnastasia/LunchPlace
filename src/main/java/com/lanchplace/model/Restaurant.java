@@ -7,8 +7,6 @@ public class Restaurant extends AbstractBaseEntity {
 
     private String name;
 
-
-
     private Long votesCount;
 
 
