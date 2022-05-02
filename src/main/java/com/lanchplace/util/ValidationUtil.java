@@ -3,7 +3,12 @@ package com.lanchplace.util;
 import com.lanchplace.model.AbstractBaseEntity;
 import com.lanchplace.util.exception.NotFoundException;
 
+import java.util.Optional;
+
 public class ValidationUtil {
+
+    private ValidationUtil() {
+    }
 
     public static <T> T checkNotFoundWithId(T object, int id) {
         checkNotFoundWithId(object != null, id);
@@ -14,6 +19,13 @@ public class ValidationUtil {
         checkNotFound(found, "id=" + id);
     }
 
+
+    public static <T> T checkNotFoundWithId(Optional<T> optional, int id) {
+        return checkNotFoundWithId(optional, "Not found entity with id=" + id);
+    }
+    public static <T> T checkNotFoundWithId(Optional<T> optional, String msg) {
+        return optional.orElseThrow(() -> new NotFoundException(msg));
+    }
     public static <T> T checkNotFound(T object, String msg) {
         checkNotFound(object != null, msg);
         return object;
@@ -35,7 +47,7 @@ public class ValidationUtil {
 //      conservative when you reply, but accept liberally (http://stackoverflow.com/a/32728226/548473)
         if (entity.isNew()) {
             entity.setId(id);
-        } else if (entity.getId() != id) {
+        } else if (entity.id() != id) {
             throw new IllegalArgumentException(entity + " must be with id=" + id);
         }
     }

@@ -1,55 +1,54 @@
 package com.lanchplace.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-public class Vote {
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name = "vote", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "created"}, name = "vote_unique_user_created_idx")})
+public class Vote extends AbstractBaseEntity {
 
-    private User user;
-    private Restaurant restaurant;
+    @Column(name = "user_id", nullable = false)
+    @NotNull
+    private int userId;
+
+    @Column(name = "rest_id", nullable = false)
+    @NotNull
+    private int restaurantId;
+
+    @Column(name = "created", nullable = false)
+    @NotNull
     private LocalDate date;
 
-    public Vote() {
+
+    public Vote(Integer userId, Integer restaurantId) {
+        this(null, LocalDate.now(), userId, restaurantId);
     }
 
-
-    public Vote(User user, Restaurant restaurant, LocalDate date) {
-        this.user = user;
-        this.restaurant = restaurant;
+    public Vote(Integer id, LocalDate date, Integer userId, Integer restaurantId) {
+        super(id);
         this.date = date;
-    }
-
-
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
+        this.userId = userId;
+        this.restaurantId = restaurantId;
     }
 
     @Override
     public String toString() {
         return "Vote{" +
-                "user=" + user +
-                ", restaurant=" + restaurant +
+                "id=" + id +
                 ", date=" + date +
+                ", userId=" + userId +
+                ", restaurantId=" + restaurantId +
                 '}';
     }
 }

@@ -2,7 +2,9 @@ package com.lanchplace.service;
 
 import com.lanchplace.model.User;
 import com.lanchplace.repository.UserRepository;
+import com.lanchplace.util.ValidationUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class UserService {
     }
 
     public User create(User user) {
+        Assert.notNull(user, "user must not be null");
         return userRepository.save(user);
     }
 
@@ -27,7 +30,7 @@ public class UserService {
     }
 
     public User get(int id) {
-        return checkNotFoundWithId(userRepository.get(id), id);
+        return ValidationUtil.checkNotFoundWithId(userRepository.getById(id), id);
     }
 
     public User getByEmail(String email) {
@@ -35,10 +38,11 @@ public class UserService {
     }
 
     public List<User> getAll() {
-        return userRepository.getAll();
+        return userRepository.findAll();
     }
 
     public void update(User user) {
-        checkNotFoundWithId(userRepository.save(user), user.getId());
+        Assert.notNull(user, "user must not be null");
+        checkNotFoundWithId(userRepository.save(user), user.id());
     }
 }

@@ -2,7 +2,6 @@ package com.lanchplace.web;
 
 import com.lanchplace.model.Dish;
 import com.lanchplace.repository.DishRepository;
-import com.lanchplace.repository.inmemory.InMemoryDishRepository;
 import com.lanchplace.util.DishUtil;
 import com.lanchplace.web.dish.DishRestController;
 import org.slf4j.Logger;
@@ -37,22 +36,20 @@ public class DishServlet extends HttpServlet {
         super.destroy();
     }
 
-        @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-       // String id = request.getParameter("id");
+        // String id = request.getParameter("id");
 
         Dish dish = new Dish(
-                request.getParameter("restaurant"),
                 request.getParameter("description"),
-                Double.parseDouble(request.getParameter("price")),
-                LocalDate.parse(request.getParameter("date")));
+                Double.parseDouble(request.getParameter("price")));
 
-            if (StringUtils.hasLength(request.getParameter("id"))) {
-                dishController.update(dish, getId(request));
-            } else {
-                dishController.create(dish);
-            }
+        if (StringUtils.hasLength(request.getParameter("id"))) {
+            dishController.update(dish, getId(request));
+        } else {
+            dishController.create(dish);
+        }
         response.sendRedirect("dishes");
     }
 
@@ -63,15 +60,16 @@ public class DishServlet extends HttpServlet {
         switch (action == null ? "all" : action) {
             case "delete":
                 int id = getId(request);
+                int menuId = getMenuId(request);
                 log.info("Delete {}", id);
-                dishController.delete(id);
+                dishController.delete(id,menuId);
                 response.sendRedirect("dishes");
                 break;
             case "create":
             case "update":
                 final Dish dish = "create".equals(action) ?
-                        new Dish("","", 100.40,LocalDate.now()) :
-                        dishController.get(getId(request));
+                        new Dish("", 100.40, null) :
+                        dishController.get(getId(request),getMenuId(request));
                 request.setAttribute("dish", dish);
                 request.getRequestDispatcher("/dishForm.jsp").forward(request, response);
                 break;
@@ -79,7 +77,7 @@ public class DishServlet extends HttpServlet {
             default:
                 log.info("getAll");
                 request.setAttribute("dishes",
-                        dishController.getAll());
+                        dishController.getAll(getMenuId(request)));
                 request.getRequestDispatcher("/dishes.jsp").forward(request, response);
                 break;
         }
@@ -87,6 +85,11 @@ public class DishServlet extends HttpServlet {
 
     private int getId(HttpServletRequest request) {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
+        return Integer.parseInt(paramId);
+    }
+
+    private int getMenuId(HttpServletRequest request) {
+        String paramId = Objects.requireNonNull(request.getParameter("menuId"));
         return Integer.parseInt(paramId);
     }
 }

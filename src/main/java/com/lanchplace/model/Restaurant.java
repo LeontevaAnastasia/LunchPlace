@@ -1,48 +1,44 @@
 package com.lanchplace.model;
 
-import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name = "restaurant", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "phone"}, name = "restaurant_unique_name_phone_idx")})
 public class Restaurant extends AbstractBaseEntity {
 
-
+    @Column(name = "name", nullable = false)
+    @NotBlank
+    @Size(min = 1, max = 100)
     private String name;
 
-    private Long votesCount;
-
-
-    public Restaurant(Integer id, String name, Long votesCount) {
-      super(id);
-      this.name = name;
-      this.votesCount = votesCount;
+    public Restaurant(String name) {
+        this(null, name);
     }
 
-    public Restaurant(String name,  Long votes) {
-        this(null, name,votes);
-
-    }
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Restaurant(Integer id, String name) {
+        super(id);
         this.name = name;
-    }
 
-    public Long getVotesCount() {
-        return votesCount;
-    }
-
-    public void setVotesCount(Long votesCount) {
-        this.votesCount = votesCount;
-    }
-    public boolean isNew() {
-        return id == null;
     }
 
     @Override
     public String toString() {
         return "Restaurant{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 

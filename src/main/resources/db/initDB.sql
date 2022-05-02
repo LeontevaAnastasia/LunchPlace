@@ -33,9 +33,6 @@ CREATE TABLE restaurant
 (
         id      INTEGER DEFAULT nextval('GLOBAL_SEQ') PRIMARY KEY,
         name    VARCHAR(50)  NOT NULL
-       // phone   VARCHAR(16)  NOT NULL,
-      //  address VARCHAR(300) NOT NULL,
-      //  website VARCHAR(100)
         );
 CREATE UNIQUE INDEX restaurant_unique_name_idx ON restaurant (name);
 

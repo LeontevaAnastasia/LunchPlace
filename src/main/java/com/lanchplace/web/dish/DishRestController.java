@@ -27,16 +27,16 @@ public class DishRestController {
         this.dishService = dishService;
     }
 
-    public Dish get(int id) {
-        return dishService.get(id);
+    public Dish get(int id, int menuId) {
+        return dishService.get(id,menuId);
     }
 
-    public void delete(int id) {
-        dishService.delete(id);
+    public void delete(int id, int menuId) {
+        dishService.delete(id, menuId);
     }
 
-    public Collection<Dish> getAll() {
-        return DishUtil.todayMenu(dishService.getAll());
+    public Collection<Dish> getAll(int menuId) {
+        return DishUtil.todayMenu(dishService.getAll(menuId));
     }
 
     public Dish create(Dish dish) {

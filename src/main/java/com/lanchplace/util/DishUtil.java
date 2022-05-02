@@ -13,17 +13,17 @@ import java.util.stream.Collectors;
 public class DishUtil {
   // для тестирования добавили блюд, нужно их отсортировать по ресторанам и присвоить ресторану лист с его блюдом
     public static final List<Dish> dishes = Arrays.asList(
-            new Dish(new Restaurant("Shabby",null).getName(),"Сырный суп", 299.00, LocalDate.of(2022,Month.APRIL,20)),
-            new Dish(new Restaurant("Shabby",null).getName(),"Жаркое по домашнему", 350.50, LocalDate.of(2022,Month.APRIL,19)),
-            new Dish(new Restaurant("Seafood",null).getName(),"Салат с креветками", 420.00, LocalDate.of(2022,Month.APRIL,24)),
-            new Dish(new Restaurant("Seafood",null).getName(),"Том ям", 390.70, LocalDate.of(2022,Month.APRIL,23)),
-            new Dish(new Restaurant("Tokyo",null).getName(),"Курица в кисло-сладком соусе", 490.00, LocalDate.of(2022,Month.APRIL,22))
+            new Dish("Сырный суп", 299.00),
+            new Dish("Жаркое по домашнему", 350.50),
+            new Dish("Салат с креветками", 420.00),
+            new Dish("Том ям", 390.70),
+            new Dish("Курица в кисло-сладком соусе", 490.00)
             );
 
     public static final Collection<Restaurant> restaurant = Arrays.asList(
-            new Restaurant("Shabby",0L),
-            new Restaurant("Seafood",0L),
-            new Restaurant("Tokyo",0L)
+            new Restaurant("Shabby"),
+            new Restaurant("Seafood"),
+            new Restaurant("Tokyo")
     );
 
     public static Collection<Restaurant> getRestaurant(Collection<Restaurant> restaurant){
@@ -34,7 +34,7 @@ public class DishUtil {
     public static List<Dish> todayMenu(Collection<Dish> dishes){
         LocalDate now = LocalDate.now();
     return    dishes.stream()
-                .filter(dish ->dish.getDate().compareTo(now)==0)
+               // .filter(dish ->dish.getDate().compareTo(now)==0)
                 .collect(Collectors.toList());
     }
 

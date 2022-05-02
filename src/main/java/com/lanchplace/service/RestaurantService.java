@@ -2,7 +2,9 @@ package com.lanchplace.service;
 import com.lanchplace.model.Restaurant;
 import com.lanchplace.repository.DishRepository;
 import com.lanchplace.repository.RestaurantRepository;
+import com.lanchplace.util.ValidationUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +21,7 @@ public class RestaurantService {
     }
 
     public Restaurant get(int id) {
-        return checkNotFoundWithId(restaurantRepository.get(id), id);
+        return ValidationUtil.checkNotFoundWithId(restaurantRepository.getById(id), id);
     }
 
     public void delete(int id) {
@@ -28,14 +30,16 @@ public class RestaurantService {
 
 
     public Collection<Restaurant> getAll() {
-        return restaurantRepository.getAllRestaurant();
+        return restaurantRepository.findAll();
     }
 
     public void update(Restaurant restaurant) {
-        checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.getId());
+        Assert.notNull(restaurant, "meal must not be null");
+        checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.id());
     }
 
     public Restaurant create(Restaurant restaurant) {
+        Assert.notNull(restaurant, "meal must not be null");
         return restaurantRepository.save(restaurant);
     }
 }

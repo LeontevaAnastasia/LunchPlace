@@ -1,59 +1,54 @@
 package com.lanchplace.model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.Range;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
+
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name = "dish", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "menu_id"}, name = "dish_unique_menu_name_idx")})
 public class Dish extends AbstractBaseEntity {
 
-    private Integer id;
-    private  String restaurant;
+    @Column(name = "name", nullable = false)
+    @NotBlank
+    @Size(min = 1, max = 100)
     private  String description;
+
+    @Column(name = "price", nullable = false)
+    @NotNull
+    @Range(min = 1, max = 10000)
     private  Double price;
-    private LocalDate date;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_id", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonBackReference
+    private Menu menu;
 
 
-    public Dish(Integer id, String restaurant,String description, Double price, LocalDate date) {
+    public Dish(String description, Double price, Menu menu) {
+        this(null, description, price, menu);
+    }
+    public Dish(String description, Double price) {
+        this(null, description, price, null);
+    }
+    public Dish(Integer id, String description, Double price, Menu menu) {
         super(id);
-        this.restaurant = restaurant;
         this.description = description;
         this.price = price;
-        this.date=date;
-    }
-
-    public Dish(String restaurant, String description, Double price, LocalDate date) {
-        this(null, restaurant, description, price, date);
-    }
-
-    public String getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(String restaurant) {
-        this.restaurant = restaurant;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
+        this.menu = menu;
     }
 
 
@@ -62,10 +57,8 @@ public class Dish extends AbstractBaseEntity {
     public String toString() {
         return "Dish{" +
                 "id=" + id +
-                ", restaurant=" + restaurant +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", date=" + date +
                 '}';
     }
 }

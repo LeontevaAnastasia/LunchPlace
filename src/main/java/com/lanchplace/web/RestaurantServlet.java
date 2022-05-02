@@ -42,8 +42,7 @@ public class RestaurantServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         Restaurant restaurant = new Restaurant(
-                request.getParameter("name"),
-                0L);
+                request.getParameter("name"));
 
         if (StringUtils.hasLength(request.getParameter("id"))) {
             restaurantController.update(restaurant, getId(request));
@@ -67,7 +66,7 @@ public class RestaurantServlet extends HttpServlet {
             case "create":
             case "update":
                 final Restaurant restaurant = "create".equals(action) ?
-                        new Restaurant("",0L) :
+                        new Restaurant("") :
                         restaurantController.get(getId(request));
                 request.setAttribute("restaurant", restaurant);
                 request.getRequestDispatcher("/restaurantForm.jsp").forward(request, response);
