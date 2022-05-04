@@ -24,14 +24,30 @@ public class Restaurant extends AbstractBaseEntity {
     @Size(min = 1, max = 100)
     private String name;
 
+    @Column(name = "vote_counter")
+    Long votesCounter;
+
     public Restaurant(String name) {
-        this(null, name);
+        super(null);
+        this.name = name;
+        this.votesCounter = 0L;
     }
 
     public Restaurant(Integer id, String name) {
         super(id);
         this.name = name;
+        this.votesCounter = 0L;
+    }
 
+    public Restaurant(String name, Long votesCounter) {
+        this.name = name;
+        this.votesCounter = votesCounter;
+    }
+
+    public Restaurant(Integer id, String name, Long votesCounter) {
+        super(id);
+        this.name = name;
+        this.votesCounter = votesCounter;
     }
 
     @Override

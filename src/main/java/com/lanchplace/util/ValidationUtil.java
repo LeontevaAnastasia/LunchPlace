@@ -2,6 +2,7 @@ package com.lanchplace.util;
 
 import com.lanchplace.model.AbstractBaseEntity;
 import com.lanchplace.util.exception.NotFoundException;
+import org.springframework.dao.DataAccessException;
 
 import java.util.Optional;
 
@@ -49,6 +50,17 @@ public class ValidationUtil {
             entity.setId(id);
         } else if (entity.id() != id) {
             throw new IllegalArgumentException(entity + " must be with id=" + id);
+        }
+    }
+
+    public static void IsUniqueDishNameForMenu (boolean isInDb) {
+        if (isInDb) {
+            throw new DataAccessException("Dish is already on this menu.") {
+                @Override
+                public String getMessage() {
+                    return super.getMessage();
+                }
+            };
         }
     }
 }

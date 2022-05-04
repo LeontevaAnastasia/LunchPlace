@@ -61,4 +61,5 @@ public class Dish extends AbstractBaseEntity {
                 ", price=" + price +
                 '}';
     }
+
 }

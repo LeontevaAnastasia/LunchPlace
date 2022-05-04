@@ -46,9 +46,9 @@ public class DishServlet extends HttpServlet {
                 Double.parseDouble(request.getParameter("price")));
 
         if (StringUtils.hasLength(request.getParameter("id"))) {
-            dishController.update(dish, getId(request));
+           // dishController.update(dish, getId(request));
         } else {
-            dishController.create(dish);
+         //   dishController.create(dish);
         }
         response.sendRedirect("dishes");
     }

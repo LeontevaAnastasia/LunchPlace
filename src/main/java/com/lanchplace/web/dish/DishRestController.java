@@ -39,17 +39,6 @@ public class DishRestController {
         return DishUtil.todayMenu(dishService.getAll(menuId));
     }
 
-    public Dish create(Dish dish) {
-        checkNew(dish);
-        log.info("create {}", dish);
-        return dishService.create(dish);
-    }
-
-    public void update(Dish dish, int id) {
-        assureIdConsistent(dish, id);
-        log.info("update {}", dish);
-        dishService.update(dish);
-    }
 
 
 }

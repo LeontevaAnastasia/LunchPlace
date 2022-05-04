@@ -1,7 +1,6 @@
 package com.lanchplace.repository;
 
 
-import com.lanchplace.dto.RestaurantTo;
 import com.lanchplace.model.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -10,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -27,7 +25,21 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
     @Query("select r from Restaurant r where r.name=:name")
     Restaurant getByName(@Param("name") String name);
 
-    @Query("select new com.lanchplace.dto.RestaurantTo(v.restaurantId, count (v.restaurantId))" +
-            "from Vote v group by v.restaurantId order by count (v.restaurantId) desc")
-    List<RestaurantTo> getAllWithCount();
+    //@Query("select new com.lanchplace.dto.RestaurantTo(v.restaurantId, count (v.restaurantId))" +
+          //  "from Vote v group by v.restaurantId order by count (v.restaurantId) desc")
+    //List<RestaurantTo> getAllWithCount();
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Restaurant r SET r.votesCounter=:counter WHERE r.id=:id")
+    boolean incrementVoteCounter(@Param("counter") int counter);
+
+
+    @Query("SELECT r.votesCounter FROM Restaurant r WHERE r.id=:id")
+    int getVoteCounter(@Param("id") int id);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Restaurant r SET r.votesCounter=0")
+    void resetVoteCounter();
 }

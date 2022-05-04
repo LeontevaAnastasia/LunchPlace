@@ -19,11 +19,14 @@ public class DishService {
     private final MenuRepository menuRepository;
 
     public Dish get(int id, int menuId) {
-        return checkNotFoundWithId(dishRepository.findById(id,menuId), id);
+
+        return ValidationUtil.checkNotFoundWithId(dishRepository.findById(id, menuId), id);
     }
 
     public void delete(int id, int menuId) {
-        checkNotFoundWithId(dishRepository.delete(id, menuId), id);
+
+        checkNotFoundWithId(dishRepository.delete(id, menuId),id);
+
     }
 
 
@@ -33,13 +36,23 @@ public class DishService {
         return dishRepository.getAll(menuId);
     }
 
-    public void update(Dish dish) {
+    public void update(Dish dish,int menuId) {
         Assert.notNull(dish, "dish must not be null");
-        checkNotFoundWithId(dishRepository.save(dish), dish.id());
+        ValidationUtil.checkNotFoundWithId(save(dish, menuId), dish.getId());
     }
 
-    public Dish create(Dish dish) {
-        Assert.notNull(dish, "dish must not be null");
+    public Dish create(Dish dish, int menuId) {
+        Assert.notNull(dish, "Dish must not be null.");
+        ValidationUtil.IsUniqueDishNameForMenu(dishRepository.getByName(dish.getDescription(), menuId) != null);
+
+        return save(dish,menuId);
+    }
+
+    public Dish save(Dish dish, int menuId) {
+        if (!dish.isNew() && get(dish.getId(), menuId) == null) {
+            return null;
+        }
+        dish.setMenu(menuRepository.getOne(menuId));
         return dishRepository.save(dish);
     }
 }

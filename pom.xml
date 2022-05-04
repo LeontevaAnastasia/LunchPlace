@@ -38,8 +38,10 @@
     <junit.version>4.13.2</junit.version>
     <assertj.version>3.22.0</assertj.version>
 
-    <lombok.version>1.18.16</lombok.version>
+    <lombok.version>1.18.22</lombok.version>
 
+    <!--Cache-->
+    <ehcache.version>3.9.9</ehcache.version>
   </properties>
 
   <dependencies>
@@ -167,6 +169,25 @@
       <artifactId>junit</artifactId>
       <version>4.13.2</version>
       <scope>test</scope>
+    </dependency>
+
+    <!-- Cache -->
+    <dependency>
+      <groupId>javax.cache</groupId>
+      <artifactId>cache-api</artifactId>
+      <version>1.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ehcache</groupId>
+      <artifactId>ehcache</artifactId>
+      <scope>runtime</scope>
+      <version>${ehcache.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.glassfish.jaxb</groupId>
+          <artifactId>jaxb-runtime</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 

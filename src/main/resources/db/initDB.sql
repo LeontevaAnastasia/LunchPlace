@@ -32,7 +32,8 @@ CREATE TABLE user_role
 CREATE TABLE restaurant
 (
         id      INTEGER DEFAULT nextval('GLOBAL_SEQ') PRIMARY KEY,
-        name    VARCHAR(50)  NOT NULL
+        name    VARCHAR(50)  NOT NULL,
+        vote_counter   LONG                           DEFAULT 0
         );
 CREATE UNIQUE INDEX restaurant_unique_name_idx ON restaurant (name);
 
