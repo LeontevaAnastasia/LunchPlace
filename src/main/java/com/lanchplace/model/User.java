@@ -6,12 +6,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import org.springframework.util.CollectionUtils;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -36,7 +41,7 @@ public class User extends AbstractNamedEntity {
 
     @Column(name = "password", nullable = false)
     @NotBlank
-    @Size(min = 5, max = 100)
+    @Size(min = 4, max = 100)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
 
@@ -53,23 +58,43 @@ public class User extends AbstractNamedEntity {
             uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"}, name = "user_roles_unique_idx")})
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
-    Set<Role> roles;
+    private Set<Role> roles;
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
+    }
+    @Column(name = "restaurant_id")
+    private Integer restaurantId;
+
+    @Transient
+    private LocalDateTime voteTime;
 
     public User(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getRegistration(), u.getEnabled(), u.getRoles());
+        this(u.id, u.name, u.email, u.password, u.registration, u.restaurantId, u.voteTime, u.enabled, u.roles);
     }
 
-    public User(Integer id, String name, String email, String password, Role role, Role... roles) {
-        this(id, name, email, password, LocalDate.now(), true, EnumSet.of(role, roles));
+    public User(Integer id, String name, String email, String password, Integer restaurantId, Role role, Role... roles) {
+        this(id, name, email, password, LocalDate.now(), restaurantId, LocalDateTime.now(), true, EnumSet.of(role, roles));
     }
 
-    public User(Integer id, String name, String email, String password, LocalDate registration, Boolean enabled, Set<Role> roles) {
+    public User(Integer id, String name, String email, String password, LocalDate registration, Integer restaurantId, LocalDateTime voteTime, Boolean enabled, Collection<Role> roles) {
         super(id);
         this.name = name;
         this.email = email;
         this.password = password;
         this.registration = registration;
+        this.restaurantId = restaurantId;
+        this.voteTime = voteTime;
         this.enabled = enabled;
-        this.roles = roles;
+        setRoles(roles);
     }
+
+
 }

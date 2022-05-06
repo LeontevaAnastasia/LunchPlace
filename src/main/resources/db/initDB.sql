@@ -17,7 +17,8 @@ CREATE TABLE users
     email    VARCHAR(100)                 NOT NULL,
     password VARCHAR(500)                 NOT NULL,
     created  DATE    DEFAULT CURRENT_DATE NOT NULL,
-    enabled  BOOL    DEFAULT TRUE         NOT NULL
+    enabled  BOOL    DEFAULT TRUE         NOT NULL,
+    restaurant_id    INTEGER             DEFAULT NULL
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
 
