@@ -22,6 +22,7 @@ public class RestaurantRestController {
     private static final Logger log = LoggerFactory.getLogger(RestaurantRestController.class);
 
     public RestaurantRestController(RestaurantService restaurantService) {
+
         this.restaurantService = restaurantService;
     }
 
