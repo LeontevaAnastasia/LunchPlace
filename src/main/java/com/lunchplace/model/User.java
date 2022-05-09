@@ -45,7 +45,7 @@ public class User extends AbstractNamedEntity {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
 
-    @Column(name = "created", nullable = false)
+    @Column(name = "created", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
     @NotNull
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     LocalDate registration;
