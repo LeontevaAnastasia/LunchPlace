@@ -1,15 +1,24 @@
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Java Enterprise (LunchPlace)</title>
-</head>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setBundle basename="messages.app"/>
+
+<html>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
-<h3><a href="https://github.com/LeontevaAnastasia/LunchPlace" target="_blank">Java Enterprise (LunchPlace)</a></h3>
-<hr>
-<ul style="font-size: large">
-    <li><a href="users">Users</a></li>
-    <li><a href="restaurants">Restaurant</a></li>
-    <li><a href="dishes">Dishes</a></li>
-</ul>
+<jsp:include page="fragments/bodyHeader.jsp"/>
+<br>
+<section>
+    <form method="post" action="users">
+        <fmt:message key="app.login"/>: <select name="userId">
+        <option value="10000" selected>User1</option>
+        <option value="10001" selected>User2</option>
+        <option value="10002">Admin</option>
+    </select>
+        <button type="submit"><fmt:message key="common.select"/></button>
+    </form>
+</section>
+
 </body>
 </html>

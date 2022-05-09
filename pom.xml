@@ -12,7 +12,7 @@
   <name>lunchplace Maven Webapp</name>
 
   <properties>
-    <java.version>15</java.version>
+    <java.version>17</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -28,6 +28,9 @@
 
     <!--DB-->
     <postgresql.version>42.2.17</postgresql.version>
+
+    <!--    JSP  -->
+    <jstl.version>1.2</jstl.version>
 
     <!--    Tests  -->
 
@@ -108,6 +111,13 @@
       <artifactId>h2</artifactId>
       <version>1.4.200</version>
       <!-- <scope>runtime</scope>-->
+    </dependency>
+
+    <!--JSP-->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>${jstl.version}</version>
     </dependency>
 
     <!--- ORM -->
@@ -273,7 +283,7 @@
   </dependencyManagement>
 
   <build>
-    <finalName>lunchroom</finalName>
+    <finalName>lunchplace</finalName>
     <defaultGoal>package</defaultGoal>
     <plugins>
       <plugin>
@@ -284,6 +294,12 @@
           <source>${java.version}</source>
           <target>${java.version}</target>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.3.2</version>
       </plugin>
       <plugin>
         <!--https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven -->
@@ -343,8 +359,8 @@
           </configuration>
           <deployables>
             <deployable>
-              <groupId>team.s2f</groupId>
-              <artifactId>lunchroom</artifactId>
+              <groupId>com.lunchplace</groupId>
+              <artifactId>LunchPlace</artifactId>
               <type>war</type>
               <properties>
                 <context>${project.build.finalName}</context>
