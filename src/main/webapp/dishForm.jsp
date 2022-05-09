@@ -28,7 +28,7 @@
     <h3><a href="index.jsp">Home</a></h3>
     <hr>
     <h2>${param.action == 'create' ? 'Create dish' : 'Edit dish'}</h2>
-    <jsp:useBean id="dish" type="com.lanchplace.model.Dish" scope="request"/>
+    <jsp:useBean id="dish" type="com.lunchplace.model.Dish" scope="request"/>
     <form method="post" action="dishes">
         <input type="hidden" name="id" value="${dish.id}">
         <dl>

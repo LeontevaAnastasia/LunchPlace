@@ -34,7 +34,7 @@
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           p:dataSource-ref="dataSource"
-          p:packagesToScan="com.lanchplace.**.model">
+          p:packagesToScan="com.lunchplace.**.model">
 
         <property name="jpaPropertyMap">
             <map>
@@ -55,8 +55,8 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
           p:entityManagerFactory-ref="entityManagerFactory"/>
 
-    <context:component-scan base-package="com.lanchplace.**.repository"/>
-    <jpa:repositories base-package="com.lanchplace.**.repository"/>
+    <context:component-scan base-package="com.lunchplace.**.repository"/>
+    <jpa:repositories base-package="com.lunchplace.**.repository"/>
 
     <beans profile="tomcat">
         <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/lunchplace"/>

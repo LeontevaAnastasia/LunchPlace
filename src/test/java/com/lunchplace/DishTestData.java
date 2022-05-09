@@ -1,6 +1,6 @@
 package com.lunchplace;
 
-import com.lanchplace.model.Dish;
+import com.lunchplace.model.Dish;
 
 import java.util.Comparator;
 import java.util.List;

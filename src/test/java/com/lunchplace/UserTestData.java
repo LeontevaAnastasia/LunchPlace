@@ -1,12 +1,12 @@
 package com.lunchplace;
 
-import com.lanchplace.model.Role;
-import com.lanchplace.model.User;
+import com.lunchplace.model.Role;
+import com.lunchplace.model.User;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import static com.lanchplace.model.AbstractBaseEntity.START_SEQ;
+import static com.lunchplace.model.AbstractBaseEntity.START_SEQ;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

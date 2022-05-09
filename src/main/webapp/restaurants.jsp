@@ -23,7 +23,7 @@
         </tr>
         </thead>
         <c:forEach items="${requestScope.restaurants}" var="restaurant">
-        <jsp:useBean id="restaurant" type="com.lanchplace.model.Restaurant"/>
+        <jsp:useBean id="restaurant" type="com.lunchplace.model.Restaurant"/>
             <td>${restaurant.name}</td
             </tr>
             <td>${restaurant.votesCount}</td

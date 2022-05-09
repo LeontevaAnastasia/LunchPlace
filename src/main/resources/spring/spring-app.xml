@@ -4,10 +4,10 @@
 
     <import resource="spring-cache.xml"/>
 
-    <context:component-scan base-package="com.lanchplace.**.repository"/>
+    <context:component-scan base-package="com.lunchplace.**.repository"/>
 
-    <context:component-scan base-package="com.lanchplace.**.service"/>
+    <context:component-scan base-package="com.lunchplace.**.service"/>
 
-    <context:component-scan base-package="com.lanchplace.**.web"/>
+    <context:component-scan base-package="com.lunchplace.**.web"/>
 
 </beans>

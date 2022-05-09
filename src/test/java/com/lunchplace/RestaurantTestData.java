@@ -1,6 +1,6 @@
 package com.lunchplace;
 
-import com.lanchplace.model.Restaurant;
+import com.lunchplace.model.Restaurant;
 
 import java.util.List;
 

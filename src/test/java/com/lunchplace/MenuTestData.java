@@ -1,6 +1,6 @@
 package com.lunchplace;
 
-import com.lanchplace.model.Menu;
+import com.lunchplace.model.Menu;
 
 import java.time.LocalDate;
 

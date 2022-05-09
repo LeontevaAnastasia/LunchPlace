@@ -1,8 +1,8 @@
 package com.lunchplace.web;
 
-import com.lanchplace.model.User;
-import com.lanchplace.util.exception.NotFoundException;
-import com.lanchplace.web.user.AdminRestController;
+import com.lunchplace.model.User;
+import com.lunchplace.util.exception.NotFoundException;
+import com.lunchplace.web.user.AdminRestController;
 import com.lunchplace.UserTestData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
