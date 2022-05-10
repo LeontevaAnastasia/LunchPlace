@@ -8,12 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 import java.util.Collection;
+import java.util.List;
 
 import static com.lunchplace.util.ValidationUtil.assureIdConsistent;
 import static com.lunchplace.util.ValidationUtil.checkNew;
 
 @Controller
-public class RestaurantRestController {
+public class RestaurantRestController extends AbstractRestaurantController{
     private final RestaurantService restaurantService;
     private static final Logger log = LoggerFactory.getLogger(RestaurantRestController.class);
 
@@ -30,7 +31,7 @@ public class RestaurantRestController {
         restaurantService.delete(id);
     }
 
-    public Collection<Restaurant> getAll() {
+    public List<Restaurant> getAll() {
         return DishUtil.getRestaurant(restaurantService.getAll());
     }
 

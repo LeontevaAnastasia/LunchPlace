@@ -23,7 +23,7 @@ public class DishUtil {
             new Restaurant("Tokyo")
     );
 
-    public static Collection<Restaurant> getRestaurant(Collection<Restaurant> restaurant){
+    public static List<Restaurant> getRestaurant(List<Restaurant> restaurant){
         return restaurant;
     }
 

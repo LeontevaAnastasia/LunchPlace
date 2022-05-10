@@ -5,7 +5,6 @@ import com.lunchplace.model.Vote;
 import com.lunchplace.repository.RestaurantRepository;
 import com.lunchplace.repository.VoteRepository;
 import com.lunchplace.util.exception.VoteException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -16,12 +15,17 @@ import java.util.List;
 import static com.lunchplace.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
-@RequiredArgsConstructor
+
 public class VoteService {
     private static final LocalTime deadline = LocalTime.of(11, 0);
 
     private final VoteRepository voteRepository;
     private final RestaurantRepository restaurantRepository;
+
+    public VoteService(VoteRepository voteRepository, RestaurantRepository restaurantRepository) {
+        this.voteRepository = voteRepository;
+        this.restaurantRepository = restaurantRepository;
+    }
 
     public Vote createOrUpdate(VoteTo voteTo, int userId) {
         checkNotFoundWithId(restaurantRepository.getById(voteTo.getRestaurantId()), voteTo.getRestaurantId());

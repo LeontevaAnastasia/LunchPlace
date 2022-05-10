@@ -1,8 +1,5 @@
 package com.lunchplace.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,9 +8,6 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@NoArgsConstructor
-@Getter
-@Setter
 @Entity
 @Table(name = "vote", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "created"}, name = "vote_unique_user_created_idx")})
 public class Vote extends AbstractBaseEntity {
@@ -30,7 +24,9 @@ public class Vote extends AbstractBaseEntity {
     @NotNull
     private LocalDate date;
 
+    public Vote(){
 
+    }
     public Vote(Integer userId, Integer restaurantId) {
         this(null, LocalDate.now(), userId, restaurantId);
     }
@@ -40,6 +36,30 @@ public class Vote extends AbstractBaseEntity {
         this.date = date;
         this.userId = userId;
         this.restaurantId = restaurantId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     @Override

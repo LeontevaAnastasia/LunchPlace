@@ -2,20 +2,24 @@ package com.lunchplace.service;
 import com.lunchplace.model.Restaurant;
 import com.lunchplace.repository.RestaurantRepository;
 import com.lunchplace.util.ValidationUtil;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.Collection;
+import java.util.List;
 
 import static com.lunchplace.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
-@RequiredArgsConstructor
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+
+    public RestaurantService(RestaurantRepository restaurantRepository) {
+        this.restaurantRepository = restaurantRepository;
+    }
 
     public Restaurant get(int id) {
 
@@ -27,7 +31,7 @@ public class RestaurantService {
         ValidationUtil.checkNotFoundWithId(restaurantRepository.findById(id), id);
     }
 
-    public Collection<Restaurant> getAll() {
+    public List<Restaurant> getAll() {
         return restaurantRepository.findAll();
     }
 

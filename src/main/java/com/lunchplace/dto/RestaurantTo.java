@@ -1,30 +1,47 @@
 package com.lunchplace.dto;
 
 import com.lunchplace.model.AbstractBaseEntity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
+
 public class RestaurantTo extends AbstractBaseEntity implements  Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
+
     Integer id;
     private  String name;
 
     private  Long votesCounter;
+
+    public RestaurantTo(){
+
+    }
 
     public RestaurantTo(Integer id, String name, Long votesCounter) {
         super(id);
         this.name = name;
         this.votesCounter = votesCounter;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,6 +57,12 @@ public class RestaurantTo extends AbstractBaseEntity implements  Serializable {
         return Objects.hash(id, name, votesCounter);
     }
 
-
-
+    @Override
+    public String toString() {
+        return "RestaurantTo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", votesCounter=" + votesCounter +
+                '}';
+    }
 }

@@ -4,7 +4,6 @@ import com.lunchplace.model.Menu;
 import com.lunchplace.repository.MenuRepository;
 import com.lunchplace.repository.RestaurantRepository;
 import com.lunchplace.util.ValidationUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -19,11 +18,16 @@ import java.util.List;
 import static com.lunchplace.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
-@RequiredArgsConstructor
+
 public class MenuService {
 
     private final MenuRepository menuRepository;
     private final RestaurantRepository restaurantRepository;
+
+    public MenuService(MenuRepository menuRepository, RestaurantRepository restaurantRepository) {
+        this.menuRepository = menuRepository;
+        this.restaurantRepository = restaurantRepository;
+    }
 
     @Transactional
     @CacheEvict(value = "menus", allEntries = true)

@@ -1,24 +1,34 @@
 package com.lunchplace.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
 public class VoteTo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotNull
     private int restaurantId;
 
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    public VoteTo(){
+
+    }
     public VoteTo(@NotNull int restaurantId) {
         this.restaurantId = restaurantId;
+    }
+
+    @Override
+    public String toString() {
+        return "VoteTo{" +
+                "restaurantId=" + restaurantId +
+                '}';
     }
 }

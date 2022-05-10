@@ -1,9 +1,6 @@
 package com.lunchplace.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
@@ -13,9 +10,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@NoArgsConstructor
-@Getter
-@Setter
 @Entity
 @Table(name = "dish", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "menu_id"}, name = "dish_unique_menu_name_idx")})
 public class Dish extends AbstractBaseEntity {
@@ -36,6 +30,9 @@ public class Dish extends AbstractBaseEntity {
     @JsonBackReference
     private Menu menu;
 
+    public Dish(){
+
+    }
 
     public Dish(String description, Double price, Menu menu) {
         this(null, description, price, menu);
@@ -50,7 +47,29 @@ public class Dish extends AbstractBaseEntity {
         this.menu = menu;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
 
     @Override
     public String toString() {

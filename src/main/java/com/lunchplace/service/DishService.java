@@ -4,7 +4,6 @@ import com.lunchplace.model.Dish;
 import com.lunchplace.repository.DishRepository;
 import com.lunchplace.repository.MenuRepository;
 import com.lunchplace.util.ValidationUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -13,10 +12,22 @@ import java.util.Collection;
 import static com.lunchplace.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
-@RequiredArgsConstructor
 public class DishService {
     private final DishRepository dishRepository;
     private final MenuRepository menuRepository;
+
+    public DishService(DishRepository dishRepository, MenuRepository menuRepository){
+        this.dishRepository = dishRepository;
+
+        this.menuRepository = menuRepository;
+    }
+    public DishRepository getDishRepository() {
+        return dishRepository;
+    }
+
+    public MenuRepository getMenuRepository() {
+        return menuRepository;
+    }
 
     public Dish get(int id, int menuId) {
 

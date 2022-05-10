@@ -23,7 +23,7 @@ public class UserTestData {
 
     public static User getNew() {
 
-        return new User(1, "NewUser", "newUser@mail.com", "123", 1003, Role.USER);
+        return new User(1, "NewUser", "newUser@mail.com", "123",  Role.USER);
     }
 
     public static User getUpdated() {
@@ -32,26 +32,22 @@ public class UserTestData {
         updatedUser.setName("User1");
         updatedUser.setEmail("user1@mail.ru");
         updatedUser.setPassword("123");
-        updatedUser.setRestaurantId(2);
         updatedUser.setRoles(Collections.singletonList(Role.ADMIN));
         return updatedUser;
     }
 
     public static User getWithResetRestID1() {
         User updatedUser = new User(user);
-        updatedUser.setRestaurantId(0);
         return updatedUser;
     }
 
     public static User getWithResetRestID2() {
         User updatedUser = new User(admin);
-        updatedUser.setRestaurantId(0);
         return updatedUser;
     }
 
     public static User getWithRestaurantId() {
         User withRestId = new User(user);
-        withRestId.setRestaurantId(WITH_REST_ID);
         return withRestId;
     }
 

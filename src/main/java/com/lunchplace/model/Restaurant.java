@@ -1,9 +1,5 @@
 package com.lunchplace.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,9 +8,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 
-@NoArgsConstructor
-@Getter
-@Setter
 @Entity
 @Table(name = "restaurant", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "phone"}, name = "restaurant_unique_name_phone_idx")})
 public class Restaurant extends AbstractBaseEntity {
@@ -27,6 +20,10 @@ public class Restaurant extends AbstractBaseEntity {
     @Column(name = "vote_counter")
     Long votesCounter;
 
+
+    public Restaurant(){
+
+    }
     public Restaurant(String name) {
         super(null);
         this.name = name;
@@ -47,6 +44,22 @@ public class Restaurant extends AbstractBaseEntity {
     public Restaurant(Integer id, String name, Long votesCounter) {
         super(id);
         this.name = name;
+        this.votesCounter = votesCounter;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getVotesCounter() {
+        return votesCounter;
+    }
+
+    public void setVotesCounter(Long votesCounter) {
         this.votesCounter = votesCounter;
     }
 

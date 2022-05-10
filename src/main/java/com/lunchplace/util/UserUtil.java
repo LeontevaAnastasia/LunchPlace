@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 public class UserUtil {
 
     public static UserTo asTo(User user) {
-        return new UserTo(user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getRestaurantId());
+        return new UserTo(user.getId(), user.getName(), user.getEmail(), user.getPassword());
     }
 
     public static User prepareToSave(User user, PasswordEncoder passwordEncoder) {

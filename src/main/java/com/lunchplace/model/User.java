@@ -1,10 +1,6 @@
 package com.lunchplace.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 import org.springframework.util.CollectionUtils;
 
@@ -20,10 +16,7 @@ import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
+
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"}, name = "users_unique_email_idx")})
 public class User extends AbstractNamedEntity {
@@ -76,25 +69,79 @@ public class User extends AbstractNamedEntity {
     @Transient
     private LocalDateTime voteTime;
 
+    public User(){
+
+    }
+
     public User(User u) {
-        this(u.id, u.name, u.email, u.password, u.registration, u.restaurantId, u.voteTime, u.enabled, u.roles);
+        this(u.id, u.name, u.email, u.password, u.registration, u.enabled, u.roles);
     }
 
-    public User(Integer id, String name, String email, String password, Integer restaurantId, Role role, Role... roles) {
-        this(id, name, email, password, LocalDate.now(), restaurantId, LocalDateTime.now(), true, EnumSet.of(role, roles));
+    public User(Integer id, String name, String email, String password, Role role, Role... roles) {
+        this(id, name, email, password, LocalDate.now(), true, EnumSet.of(role, roles));
     }
 
-    public User(Integer id, String name, String email, String password, LocalDate registration, Integer restaurantId, LocalDateTime voteTime, Boolean enabled, Collection<Role> roles) {
+    public User(Integer id, String name, String email, String password, LocalDate registration,  Boolean enabled, Collection<Role> roles) {
         super(id);
         this.name = name;
         this.email = email;
         this.password = password;
         this.registration = registration;
-        this.restaurantId = restaurantId;
-        this.voteTime = voteTime;
         this.enabled = enabled;
         setRoles(roles);
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public LocalDate getRegistration() {
+        return registration;
+    }
+
+    public void setRegistration(LocalDate registration) {
+        this.registration = registration;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", registration=" + registration +
+                ", enabled=" + enabled +
+                ", roles=" + roles +
+                ", restaurantId=" + restaurantId +
+                ", voteTime=" + voteTime +
+                '}';
+    }
 }

@@ -4,9 +4,9 @@
 
 
 <html>
-<jsp:include page="fragments/headTag.jsp"/>
+<jsp:include page="/fragments/headTag.jsp"/>
 <body>
-<jsp:include page="fragments/bodyHeader.jsp"/>
+<jsp:include page="/fragments/bodyHeader.jsp"/>
 <br>
 <section>
     <form method="post" action="users">
