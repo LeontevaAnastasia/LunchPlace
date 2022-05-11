@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 @Controller
-@RequestMapping("restaurants")
+@RequestMapping("/restaurants")
 public class JspRestaurantController extends AbstractRestaurantController{
 
     public int getId(HttpServletRequest request) {

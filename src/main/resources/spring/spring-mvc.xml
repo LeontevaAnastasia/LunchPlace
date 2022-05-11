@@ -22,7 +22,7 @@
           p:defaultEncoding="UTF-8">
         <property name="basenames" value="file:///#{systemEnvironment[LUNCHPLACE_ROOT]}/config/messages/app"/>
         <property name="fallbackToSystemLocale" value="false"/>
-    </bean>
+    </bean> config/messages/app
 
 
 

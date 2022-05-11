@@ -1,4 +1,5 @@
 package com.lunchplace.service;
+import com.lunchplace.dto.RestaurantTo;
 import com.lunchplace.model.Restaurant;
 import com.lunchplace.repository.RestaurantRepository;
 import com.lunchplace.util.ValidationUtil;
@@ -46,12 +47,6 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
-    @CacheEvict(value = "restaurantsCache", allEntries = true)
-    public void incrementVoteCounter(int id) {
-        int counter = getVoteCounter(id);
-        counter++;
-        checkNotFoundWithId(restaurantRepository.incrementVoteCounter(id), id);
-    }
 
     public int getVoteCounter(int id) {
         return checkNotFoundWithId(restaurantRepository.getVoteCounter(id), id);
@@ -59,6 +54,10 @@ public class RestaurantService {
 
     public void resetAllVoteCounter() {
         restaurantRepository.resetVoteCounter();
+    }
+
+    public List<RestaurantTo> getAllWithCount() {
+        return restaurantRepository.getAllWithCount();
     }
 }
 

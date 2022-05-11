@@ -16,6 +16,13 @@ public class RestaurantTo extends AbstractBaseEntity implements  Serializable {
 
     private  Long votesCounter;
 
+    Long votesCount;
+
+    public RestaurantTo(Integer id, Long votesCount) {
+        super(id);
+        this.votesCount = votesCount;
+    }
+
     public RestaurantTo(){
 
     }

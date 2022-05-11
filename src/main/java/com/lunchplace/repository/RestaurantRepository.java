@@ -1,6 +1,7 @@
 package com.lunchplace.repository;
 
 
+import com.lunchplace.dto.RestaurantTo;
 import com.lunchplace.model.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -9,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -42,4 +44,8 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
     @Modifying
     @Query("UPDATE Restaurant r SET r.votesCounter=0")
     void resetVoteCounter();
+
+    @Query("select new com.lunchplace.dto.RestaurantTo(v.restaurantId, count (v.restaurantId))" +
+            "from Vote v group by v.restaurantId order by count (v.restaurantId) desc")
+    List<RestaurantTo> getAllWithCount();
 }
