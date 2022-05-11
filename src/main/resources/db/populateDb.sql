@@ -11,10 +11,10 @@ FROM vote;
 
 ALTER SEQUENCE GLOBAL_SEQ RESTART WITH 100000;
 
-INSERT INTO USERS (name, email, password,restaurant_id)
-VALUES ('User1', 'user1@mail.ru', '123', null),
-       ('User2', 'user2@mail.ru', '345', null),
-       ('Admin', 'user3@mail.ru', '567', null);
+INSERT INTO USERS (name, email, password)
+VALUES ('User1', 'user1@mail.ru', '123'),
+       ('User2', 'user2@mail.ru', '345'),
+       ('Admin', 'user3@mail.ru', '567');
 
 INSERT INTO user_role (role, user_id)
 VALUES ('USER', 100000),

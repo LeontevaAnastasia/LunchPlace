@@ -63,11 +63,6 @@ public class User extends AbstractNamedEntity {
     public void setRoles(Collection<Role> roles) {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
-    @Column(name = "restaurant_id")
-    private Integer restaurantId;
-
-    @Transient
-    private LocalDateTime voteTime;
 
     public User(){
 
@@ -140,8 +135,6 @@ public class User extends AbstractNamedEntity {
                 ", registration=" + registration +
                 ", enabled=" + enabled +
                 ", roles=" + roles +
-                ", restaurantId=" + restaurantId +
-                ", voteTime=" + voteTime +
                 '}';
     }
 }

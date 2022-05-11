@@ -6,6 +6,8 @@
 
   <display-name>LunchPlace</display-name>
 
+  <absolute-ordering />
+
   <context-param>
     <param-name>spring.profiles.default</param-name>
     <param-value>H2,datajpa</param-value>
