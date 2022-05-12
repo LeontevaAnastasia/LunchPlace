@@ -19,15 +19,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("delete from User u where u.id=:id")
     int delete(@Param("id") int id);
 
-    @Transactional
-    @Modifying
-    @Query("UPDATE User u SET u.restaurantId=:restaurantId WHERE u.id=:userId")
-    int setRestaurantId(@Param("userId") int userId, @Param("restaurantId") int restaurantId);
-
-    @Transactional
-    @Modifying
-    @Query("UPDATE User u SET u.restaurantId=0")
-    void resetAllRestaurantId();
 
     Optional<User> getById(int id);
 

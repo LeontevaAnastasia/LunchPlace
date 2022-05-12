@@ -22,19 +22,19 @@ public class JspRestaurantController extends AbstractRestaurantController{
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("restaurant", new Restaurant(""));
-        return "/WEB-INF/restaurantForm.jsp";
+        return "restaurantForm";
     }
 
     @GetMapping("/update")
     public String update(HttpServletRequest request, Model model) {
         model.addAttribute("restaurant", super.get(getId(request)));
-        return "/WEB-INF/restaurantForm.jsp";
+        return "restaurantForm";
     }
 
     @GetMapping("/delete")
     public String delete(HttpServletRequest request) {
         super.delete(getId(request));
-        return "/WEB-INF/restaurants.jsp";
+        return "restaurants";
     }
 
     @PostMapping
@@ -45,6 +45,6 @@ public class JspRestaurantController extends AbstractRestaurantController{
         } else {
             super.update(restaurant);
         }
-        return "/WEB-INF/restaurants.jsp";
+        return "restaurants";
     }
 }

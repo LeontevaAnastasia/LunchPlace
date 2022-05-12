@@ -60,10 +60,6 @@ public class UserService  {
         return userRepository.findAll();
     }
 
-    @Transactional
-    public void resetAllRestaurantId() {
-        userRepository.resetAllRestaurantId();
-    }
 
     @Transactional
     public void enable(int id, boolean enabled) {

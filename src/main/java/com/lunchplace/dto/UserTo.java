@@ -23,8 +23,6 @@ public class UserTo extends AbstractBaseTo implements Serializable {
     @Email
     private String email;
 
-    private Integer restaurantId;
-
     @NotNull
     @Size(min = 5, max = 100)
     private String password;
@@ -70,7 +68,6 @@ public class UserTo extends AbstractBaseTo implements Serializable {
         return "UserTo{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", restaurantId=" + restaurantId +
                 ", password='" + password + '\'' +
                 '}';
     }
