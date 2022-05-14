@@ -1,5 +1,6 @@
 package com.lunchplace.service;
 
+import com.lunchplace.dto.UserTo;
 import com.lunchplace.model.User;
 import com.lunchplace.repository.UserRepository;
 import com.lunchplace.util.UserUtil;
@@ -18,6 +19,7 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
+import static com.lunchplace.util.UserUtil.prepareToSave;
 import static com.lunchplace.util.ValidationUtil.checkNotFound;
 import static com.lunchplace.util.ValidationUtil.checkNotFoundWithId;
 
@@ -27,11 +29,13 @@ import static com.lunchplace.util.ValidationUtil.checkNotFoundWithId;
 public class UserService  {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
+
 
     @CacheEvict(value = "usersCache", allEntries = true)
     public User create(User user) {
@@ -43,6 +47,12 @@ public class UserService  {
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
         userRepository.save(user);
+    }
+    @CacheEvict(value = "usersCache", allEntries = true)
+    @Transactional
+    public void update(UserTo userTo) {
+        User user = get(userTo.id());
+        prepareAndSave(UserUtil.updateFromTo(user, userTo));
     }
     public void delete(int id) {
         checkNotFoundWithId(userRepository.delete(id), id);
@@ -58,6 +68,10 @@ public class UserService  {
 
     public List<User> getAll() {
         return userRepository.findAll();
+    }
+
+    private User prepareAndSave(User user) {
+        return userRepository.save(prepareToSave(user, passwordEncoder));
     }
 
 

@@ -1,6 +1,7 @@
 package com.lunchplace.util;
 
 import com.lunchplace.dto.UserTo;
+import com.lunchplace.model.Role;
 import com.lunchplace.model.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
@@ -15,6 +16,17 @@ public class UserUtil {
         String password = user.getPassword();
         user.setPassword(StringUtils.hasText(password) ? passwordEncoder.encode(password) : password);
         user.setEmail(user.getEmail().toLowerCase());
+        return user;
+    }
+
+    public static User createNewFromTo(UserTo userTo) {
+        return new User(null, userTo.getName(), userTo.getEmail().toLowerCase(), userTo.getPassword(), Role.USER);
+    }
+
+    public static User updateFromTo(User user, UserTo userTo) {
+        user.setName(userTo.getName());
+        user.setEmail(userTo.getEmail().toLowerCase());
+        user.setPassword(userTo.getPassword());
         return user;
     }
 }

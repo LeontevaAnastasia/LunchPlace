@@ -1,7 +1,9 @@
 package com.lunchplace.dto;
 
 
-public class AbstractBaseTo {
+import com.lunchplace.model.AbstractNamedEntity;
+
+public class AbstractBaseTo extends AbstractNamedEntity {
     protected Integer id;
 
     public AbstractBaseTo() {

@@ -1,7 +1,9 @@
 package com.lunchplace.web.user;
 
+import com.lunchplace.dto.UserTo;
 import com.lunchplace.model.User;
 import com.lunchplace.service.UserService;
+import com.lunchplace.util.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,10 @@ public abstract class AbstractUserController {
             return userService.create(user);
         }
 
+    public void create(UserTo userTo) {
+        create(UserUtil.createNewFromTo(userTo));
+    }
+
         public void delete(int id) {
             log.info("delete {}", id);
             userService.delete(id);
@@ -44,9 +50,20 @@ public abstract class AbstractUserController {
             userService.update(user);
         }
 
+    public void update(UserTo userTo, int id) {
+        log.info("update {} with id={}", userTo, id);
+        assureIdConsistent(userTo, id);
+        userService.update(userTo);
+    }
+
         public User getByMail(String email) {
             log.info("getByEmail {}", email);
             return userService.getByEmail(email);
         }
+
+    public void enable(int id, boolean enabled) {
+        log.info(enabled ? "enable {}" : "disable {}", id);
+        userService.enable(id, enabled);
+    }
     }
 

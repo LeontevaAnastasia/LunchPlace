@@ -1,5 +1,6 @@
 package com.lunchplace.web.user;
 
+import com.lunchplace.dto.UserTo;
 import com.lunchplace.model.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,11 +26,26 @@ public class AdminUIController extends AbstractUserController {
         super.delete(id);
     }
 
+    @Override
+    @GetMapping("/{id}")
+    public User get(@PathVariable int id) {
+        return super.get(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void create(@RequestParam String name,
-                       @RequestParam String email,
-                       @RequestParam String password) {
-        super.create(new User(null, name, email, password, null, Role.USER));
+    public void createOrUpdate(UserTo userTo) {
+        if (userTo.isNew()) {
+            super.create(userTo);
+        } else {
+            super.update(userTo, userTo.id());
+        }
+    }
+
+    @Override
+    @PostMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void enable(@PathVariable int id, @RequestParam boolean enabled) {
+        super.enable(id, enabled);
     }
 }
