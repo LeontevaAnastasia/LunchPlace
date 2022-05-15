@@ -17,9 +17,9 @@ public class UserTestData {
     public static final int NOT_FOUND = 10;
     public static final int WITH_REST_ID = 10003;
 
-    public static final User user = new User(USER_ID, "BobUser", "bob@mail.com", "Password", null, Role.USER);
-    public static final User user2 = new User(USER_ID, "MikeUser", "mike@mail.com", "123", null, Role.USER);
-    public static final User admin = new User(ADMIN_ID, "Admin", "admin@mail.com", "Password2", null, Role.ADMIN, Role.USER);
+    public static final User user = new User(USER_ID, "BobUser", "bob@mail.com", "Password",  Role.USER);
+    public static final User user2 = new User(USER_ID, "MikeUser", "mike@mail.com", "123", Role.USER);
+    public static final User admin = new User(ADMIN_ID, "Admin", "admin@mail.com", "Password2", Role.ADMIN, Role.USER);
 
     public static User getNew() {
 
